@@ -1,0 +1,10 @@
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\bin\Debug\MethodCallTracing.exe.config
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\bin\Debug\MethodCallTracing.exe
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\bin\Debug\MethodCallTracing.pdb
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\obj\Debug\MethodCallTracing.csprojAssemblyReference.cache
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\obj\Debug\MethodCallTracing.csproj.CoreCompileInputs.cache
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\obj\Debug\MethodCallTracing.exe
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\obj\Debug\MethodCallTracing.pdb
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\bin\Debug\ExampleProj.dll
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\bin\Debug\ExampleProj.pdb
+C:\Users\dmitry\source\repos\MethodCallTracing\MethodCallTracing\obj\Debug\MethodCallTracing.csproj.CopyComplete
