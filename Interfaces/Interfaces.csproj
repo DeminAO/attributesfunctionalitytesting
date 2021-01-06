@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18678AEB-D4A1-4824-A04A-64FC2108E365}</ProjectGuid>
+    <ProjectGuid>{F1E42372-F451-4AF0-8523-4DFCB623C15E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExampleProj</RootNamespace>
-    <AssemblyName>ExampleProj</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <RootNamespace>Interfaces</RootNamespace>
+    <AssemblyName>Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -41,11 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CallTracingAspect.cs" />
-    <Compile Include="CallTracingAttribute.cs" />
-    <Compile Include="CallTracingProperty.cs" />
-    <Compile Include="Interfaces\IMethodTracing.cs" />
-    <Compile Include="MethodTracingAttribute.cs" />
+    <Compile Include="IExampleClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

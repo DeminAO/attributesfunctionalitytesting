@@ -1,0 +1,5 @@
+C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\Interfaces\bin\Debug\Interfaces.dll
+C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\Interfaces\bin\Debug\Interfaces.pdb
+C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\Interfaces\obj\Debug\Interfaces.csproj.CoreCompileInputs.cache
+C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\Interfaces\obj\Debug\Interfaces.dll
+C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\Interfaces\obj\Debug\Interfaces.pdb

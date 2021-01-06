@@ -21,7 +21,8 @@ namespace ExampleProj.MethodCallTracing
 			
 			var methodsInfos = type
 				.GetMethods()
-				.Where(x => x.GetCustomAttribute<MethodTracingAttribute>() != null);
+				.Where(x => x.GetCustomAttribute<MethodTracingAttribute>() != null)
+				.ToList();
 
 			if (methodsInfos.Any())
 			{

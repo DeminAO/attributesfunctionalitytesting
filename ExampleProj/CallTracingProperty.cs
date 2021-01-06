@@ -17,7 +17,7 @@ namespace ExampleProj.MethodCallTracing
 		{
 			Name = name;
 			this.type = type;
-			this.methodInfos = methodInfos;
+			this.methodInfos = methodInfos ?? new List<MethodInfo>();
 		}
 
 		public void Freeze(Context newContext) { }
@@ -25,12 +25,7 @@ namespace ExampleProj.MethodCallTracing
 		///
 		public IMessageSink GetObjectSink(MarshalByRefObject o, IMessageSink next)
 		{
-			if (!methodInfos?.Any() ?? false)
-			{
-				return next;
-			}
-
-			return new CallTracingAspect(next, type, methodInfos);
+			return !methodInfos.Any() ? next : new CallTracingAspect(next, type, o);
 		}
 
 		///
