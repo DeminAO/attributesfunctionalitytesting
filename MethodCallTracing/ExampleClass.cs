@@ -14,14 +14,14 @@ namespace MethodCallTracing
 			throw new Exception();
 		}
 
-		[MethodTracing(beforeActionName: nameof(BeforHandler), afterActionName: nameof(AfterHandlerAsync))]
+		[MethodTracing(BeforeActionName: nameof(BeforHandler), AfterActionName: nameof(AfterHandlerAsync))]
 		public void Invoke(int i)
 		{
 			Console.WriteLine($"{nameof(ExampleClass)} -> {nameof(Invoke)}({i})");
 			throw new Exception();
 		}
 
-		[MethodTracing(beforeActionName: nameof(BeforHandler), afterActionName: nameof(AfterHandlerAsync))]
+		[MethodTracing(ActionName: nameof(BeforHandler), IsBefor: true)]
 		public async Task InvokeAsync()
 		{
 			Console.WriteLine($"{nameof(ExampleClass)} -> {nameof(InvokeAsync)}");

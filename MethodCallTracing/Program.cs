@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MethodCallTracing
 {
 	class Program
 	{
-		static async Task<int> Main(string[] args)
+		static async Task<int> Main()
 		{
 			var t = new ExampleClass();
-			Console.WriteLine("-------------");
 
 			Act(t.Invoke);
 			Act(() => t.Invoke(5));
-			//_ = Act(t.InvokeAsync);
-			//await Act(t.InvokeAsync);
+			_ = Act(t.InvokeAsync);
+			await Act(t.InvokeAsync);
 
 			Console.ReadKey(false);
 

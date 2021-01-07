@@ -9,11 +9,19 @@ namespace ExampleProj.MethodCallTracing
 		public string After { get; }
 
 		///
-		public MethodTracingAttribute(string beforeActionName, string afterActionName)
+		public MethodTracingAttribute(string BeforeActionName, string AfterActionName)
 		{
-			Console.WriteLine($"{nameof(MethodTracingAttribute)} -> ctor");
-			Before = beforeActionName;
-			After = afterActionName;
+			Before = BeforeActionName;
+			After = AfterActionName;
+		}
+
+		///
+		public MethodTracingAttribute(string ActionName, bool IsBefor = true)
+		{
+			if (IsBefor)
+				Before = ActionName;
+			else
+				After = ActionName;
 		}
 	}
 }
