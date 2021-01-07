@@ -68,7 +68,7 @@ namespace ExampleProj.MethodCallTracing
 			var action = methods.FirstOrDefault(x => x.ReturnType == typeof(void));
 			if (action != null)
 			{
-				// put in array needed parameters 
+				// put in array needed parameters
 				action.Invoke(obj, new object[] { });
 			}
 			else
@@ -76,7 +76,7 @@ namespace ExampleProj.MethodCallTracing
 				action = methods.FirstOrDefault(x => x.ReturnType == typeof(Task));
 				if (action != null)
 				{
-					// put in array needed parameters 
+					// put in array needed parameters
 					await Task.Run(async () => await (Task)action.Invoke(obj, new object[] { }));
 				}
 			}

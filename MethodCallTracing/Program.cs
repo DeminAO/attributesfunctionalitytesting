@@ -20,6 +20,7 @@ namespace MethodCallTracing
 
 			var t2 = new ExampleExtendedClass();
 
+			Act(() => t2.Invoke(5));
 			await Act(t2.InvokeAsync);
 
 			Console.ReadKey(false);

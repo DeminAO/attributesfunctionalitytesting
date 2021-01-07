@@ -29,9 +29,16 @@ namespace MethodCallTracing
 			// throw new Exception();
 		}
 
-		private async Task BeforHandlerAsync()
+		[BeforExecutingBehavior(ActionName: nameof(BeforBeforHandlerAsync))]
+		public async Task BeforHandlerAsync()
 		{
 			Console.WriteLine($"{nameof(ExampleClassBase)} -> {nameof(BeforHandlerAsync)}");
+			await Task.CompletedTask;
+		}
+		
+		private async Task BeforBeforHandlerAsync()
+		{
+			Console.WriteLine($"{nameof(ExampleClassBase)} -> {nameof(BeforBeforHandlerAsync)}");
 			await Task.CompletedTask;
 		}
 		
