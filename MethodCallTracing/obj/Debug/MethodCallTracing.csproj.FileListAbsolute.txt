@@ -1,10 +1,10 @@
-C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\obj\Debug\MethodCallTracing.csproj.CoreCompileInputs.cache
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\bin\Debug\MethodCallTracing.exe.config
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\bin\Debug\MethodCallTracing.exe
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\bin\Debug\MethodCallTracing.pdb
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\bin\Debug\ExampleProj.dll
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\bin\Debug\ExampleProj.pdb
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\obj\Debug\MethodCallTracing.csprojAssemblyReference.cache
+C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\obj\Debug\MethodCallTracing.csproj.CoreCompileInputs.cache
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\obj\Debug\MethodCallTracing.csproj.CopyComplete
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\obj\Debug\MethodCallTracing.exe
 C:\Users\t8989\Documents\GitHub\attributesfunctionalitytesting\MethodCallTracing\obj\Debug\MethodCallTracing.pdb
