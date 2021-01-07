@@ -2,14 +2,13 @@
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Linq;
-using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.Threading.Tasks;
 using System.Collections;
 
 namespace ExampleProj.MethodCallTracing
 {
-	internal class CallTracingAspect : IMessageSink
+	internal sealed class CallTracingAspect : IMessageSink
 	{
 		private readonly object objectRef;
 		private readonly Type type;
@@ -55,11 +54,20 @@ namespace ExampleProj.MethodCallTracing
 
 		private async void Behavoir(string methodName)
 		{
+			if (string.IsNullOrWhiteSpace(methodName))
+			{
+				return;
+			}
+
 			var methods = type
 				.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
 				.Where(x => x.Name == methodName && !x.GetParameters().Any())
 				.ToList();
 
+			if (!methods.Any())
+			{
+				return;
+			}
 
 			ObjRef obj = RemotingServices.Marshal(objectRef as MarshalByRefObject, null, type);
 			var objToRef = Activator.GetObject(type, obj.URI);
@@ -70,12 +78,14 @@ namespace ExampleProj.MethodCallTracing
 				// put in array needed parameters 
 				action.Invoke(objToRef, new object[] { });
 			}
-
-			action = methods.FirstOrDefault(x => x.ReturnType == typeof(Task));
-			if (action != null)
+			else
 			{
-				// put in array needed parameters 
-				await (Task)action.Invoke(objToRef, new object[] { });
+				action = methods.FirstOrDefault(x => x.ReturnType == typeof(Task));
+				if (action != null)
+				{
+					// put in array needed parameters 
+					await (Task)action.Invoke(objToRef, new object[] { });
+				}
 			}
 		}
 	}

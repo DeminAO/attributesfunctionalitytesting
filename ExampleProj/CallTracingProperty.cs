@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ExampleProj.MethodCallTracing
 {
-	internal class CallTracingProperty : IContextProperty, IContributeObjectSink
+	internal sealed class CallTracingProperty : IContextProperty, IContributeObjectSink
 	{
 		public string Name { get; }
 		private readonly Type type;

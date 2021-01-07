@@ -24,10 +24,7 @@ namespace ExampleProj.MethodCallTracing
 				.Where(x => x.GetCustomAttribute<MethodTracingAttribute>() != null)
 				.ToList();
 
-			if (methodsInfos.Any())
-			{
-				ccm.ContextProperties.Add(new CallTracingProperty(callTrace, type, methodsInfos));
-			}
+			ccm.ContextProperties.Add(new CallTracingProperty(callTrace, type, methodsInfos));
 		}
 	}
 }
