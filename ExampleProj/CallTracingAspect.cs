@@ -33,24 +33,23 @@ namespace ExampleProj.MethodCallTracing
 			var m = type.GetMethods()
 				.Where(x => x.Name == t && x.GetParameters().Length == (msg.Properties["__MethodSignature"] as ICollection).Count)
 				.FirstOrDefault();
-			var attr = m?.GetCustomAttributes<MethodTracingAttribute>().FirstOrDefault();
-			if (attr == null)
-			{
-				return NextSink.SyncProcessMessage(msg);
-			}
 
+			IMethodBehaviorAttribute attr = m?.GetCustomAttribute<BeforExecutingBehaviorAttribute>();
 			Preprocess(attr);
+
 			var result = NextSink.SyncProcessMessage(msg);
+
+			attr = m?.GetCustomAttribute<AfterExecutingBehaviorAttribute>();
 			Postprocess(attr);
 
 			return result;
 		}
 
-		private void Preprocess(MethodTracingAttribute attr)
-			=> Behavoir(attr.Before);
+		private void Preprocess(IMethodBehaviorAttribute attr)
+			=> Behavoir(attr?.ActionName);
 
-		private void Postprocess(MethodTracingAttribute attr)
-			=> Behavoir(attr.After);
+		private void Postprocess(IMethodBehaviorAttribute attr)
+			=> Behavoir(attr?.ActionName);
 
 		private async void Behavoir(string methodName)
 		{

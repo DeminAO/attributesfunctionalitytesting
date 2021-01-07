@@ -11,17 +11,17 @@ namespace MethodCallTracing
 		public void Invoke()
 		{
 			Console.WriteLine($"{nameof(ExampleClass)} -> {nameof(Invoke)}");
-			throw new Exception();
 		}
 
-		[MethodTracing(BeforeActionName: nameof(BeforHandler), AfterActionName: nameof(AfterHandlerAsync))]
+		[BeforExecutingBehavior(ActionName: nameof(BeforHandler))]
+		[AfterExecutingBehavior(ActionName: nameof(AfterHandlerAsync))]
 		public void Invoke(int i)
 		{
 			Console.WriteLine($"{nameof(ExampleClass)} -> {nameof(Invoke)}({i})");
 			throw new Exception();
 		}
 
-		[MethodTracing(ActionName: nameof(BeforHandler), IsBefor: true)]
+		[BeforExecutingBehavior(ActionName: nameof(BeforHandler))]
 		public async Task InvokeAsync()
 		{
 			Console.WriteLine($"{nameof(ExampleClass)} -> {nameof(InvokeAsync)}");
