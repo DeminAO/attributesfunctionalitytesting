@@ -41,13 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterExecutingBehaviorAttribute.cs" />
-    <Compile Include="CallTracingAspect.cs" />
-    <Compile Include="CallTracingAttribute.cs" />
-    <Compile Include="CallTracingProperty.cs" />
-    <Compile Include="IMethodBehaviorAttribute.cs" />
+    <Compile Include="MemberAttributes\AfterExecutingBehaviorAttribute.cs" />
+    <Compile Include="CallingTracing\CallTracingAspect.cs" />
+    <Compile Include="CallingTracing\CallTracingAttribute.cs" />
+    <Compile Include="CallingTracing\CallTracingProperty.cs" />
+    <Compile Include="MemberAttributes\MethodBehaviorAttribute.cs" />
     <Compile Include="Interfaces\IMethodTracing.cs" />
-    <Compile Include="BeforExecutingBehaviorAttribute.cs" />
+    <Compile Include="MemberAttributes\BeforExecutingBehaviorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

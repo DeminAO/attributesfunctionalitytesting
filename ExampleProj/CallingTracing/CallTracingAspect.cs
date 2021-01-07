@@ -10,72 +10,66 @@ namespace ExampleProj.MethodCallTracing
 {
 	internal sealed class CallTracingAspect : IMessageSink
 	{
-		private readonly object objectRef;
-		private readonly Type type;
+		private MarshalByRefObject MarshalByRefObject { get; }
+		private Type ObjectType { get; }
 		
-		public CallTracingAspect(IMessageSink next, Type type, MarshalByRefObject refToObj)
+		public CallTracingAspect(IMessageSink next, Type type, MarshalByRefObject marshalByRefObject)
 		{
 			NextSink = next;
-			this.type = type;
-			objectRef = refToObj;
+			this.ObjectType = type;
+			MarshalByRefObject = marshalByRefObject;
 		}
 
 		public IMessageSink NextSink { get; }
 
 		public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
-		{
-			return NextSink.AsyncProcessMessage(msg, replySink);
-		}
+			=> ProcessNextSink(msg, () => NextSink.AsyncProcessMessage(msg, replySink));
 
 		public IMessage SyncProcessMessage(IMessage msg)
+			=> ProcessNextSink(msg, () => NextSink.SyncProcessMessage(msg));
+
+		private T ProcessNextSink<T>(IMessage msg, Func<T> getSinc)
 		{
 			var t = msg.Properties["__MethodName"].ToString();
-			var m = type.GetMethods()
+			var m = ObjectType.GetMethods()
 				.Where(x => x.Name == t && x.GetParameters().Length == (msg.Properties["__MethodSignature"] as ICollection).Count)
 				.FirstOrDefault();
 
-			IMethodBehaviorAttribute attr = m?.GetCustomAttribute<BeforExecutingBehaviorAttribute>();
-			Preprocess(attr);
+			ObjRef objRef = RemotingServices.Marshal(MarshalByRefObject, null, ObjectType);
+			var obj = Activator.GetObject(ObjectType, objRef.URI);
 
-			var result = NextSink.SyncProcessMessage(msg);
+			MethodBehaviorAttribute attr = m?.GetCustomAttribute<BeforExecutingBehaviorAttribute>();
+			BeforAndAfterBehavoir(attr?.ActionName, obj).GetAwaiter().GetResult();
+
+			var result = getSinc.Invoke();
 
 			attr = m?.GetCustomAttribute<AfterExecutingBehaviorAttribute>();
-			Postprocess(attr);
+			BeforAndAfterBehavoir(attr?.ActionName, obj).GetAwaiter().GetResult();
 
 			return result;
 		}
 
-		private void Preprocess(IMethodBehaviorAttribute attr)
-			=> Behavoir(attr?.ActionName);
-
-		private void Postprocess(IMethodBehaviorAttribute attr)
-			=> Behavoir(attr?.ActionName);
-
-		private async void Behavoir(string methodName)
+		private async Task BeforAndAfterBehavoir(string methodName, object obj)
 		{
 			if (string.IsNullOrWhiteSpace(methodName))
 			{
 				return;
 			}
 
-			var methods = type
+			var methods = ObjectType
 				.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
-				.Where(x => x.Name == methodName && !x.GetParameters().Any())
-				.ToList();
+				.Where(x => x.Name == methodName && !x.GetParameters().Any());
 
 			if (!methods.Any())
 			{
 				return;
 			}
 
-			ObjRef obj = RemotingServices.Marshal(objectRef as MarshalByRefObject, null, type);
-			var objToRef = Activator.GetObject(type, obj.URI);
-
 			var action = methods.FirstOrDefault(x => x.ReturnType == typeof(void));
 			if (action != null)
 			{
 				// put in array needed parameters 
-				action.Invoke(objToRef, new object[] { });
+				action.Invoke(obj, new object[] { });
 			}
 			else
 			{
@@ -83,7 +77,7 @@ namespace ExampleProj.MethodCallTracing
 				if (action != null)
 				{
 					// put in array needed parameters 
-					await (Task)action.Invoke(objToRef, new object[] { });
+					await Task.Run(async () => await (Task)action.Invoke(obj, new object[] { }));
 				}
 			}
 		}

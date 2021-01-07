@@ -7,12 +7,20 @@ namespace MethodCallTracing
 	{
 		static async Task<int> Main()
 		{
-			var t = new ExampleClass();
+
+			Console.WriteLine(nameof(ExampleClassBase) + " test:" );
+
+			var t = new ExampleClassBase();
 
 			Act(t.Invoke);
 			Act(() => t.Invoke(5));
-			_ = Act(t.InvokeAsync);
 			await Act(t.InvokeAsync);
+			
+			Console.WriteLine(nameof(ExampleExtendedClass) + " test:" );
+
+			var t2 = new ExampleExtendedClass();
+
+			await Act(t2.InvokeAsync);
 
 			Console.ReadKey(false);
 

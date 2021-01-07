@@ -7,7 +7,7 @@ using System.Linq;
 namespace ExampleProj.MethodCallTracing
 {
 	///
-	[AttributeUsage(AttributeTargets.Class)]
+	[AttributeUsage(AttributeTargets.Class, Inherited = true)]
 	public sealed class CallTracingAttribute : ContextAttribute
 	{
 		private const string callTrace = "CallTrace";
@@ -21,8 +21,7 @@ namespace ExampleProj.MethodCallTracing
 			
 			var methodsInfos = type
 				.GetMethods()
-				.Where(x => x.GetCustomAttribute<BeforExecutingBehaviorAttribute>() != null)
-				.ToList();
+				.Where(x => x.GetCustomAttributes<MethodBehaviorAttribute>().Any());
 
 			ccm.ContextProperties.Add(new CallTracingProperty(callTrace, type, methodsInfos));
 		}

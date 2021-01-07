@@ -4,6 +4,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Messaging;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.Remoting;
 
 namespace ExampleProj.MethodCallTracing
 {
@@ -23,9 +24,9 @@ namespace ExampleProj.MethodCallTracing
 		public void Freeze(Context newContext) { }
 
 		///
-		public IMessageSink GetObjectSink(MarshalByRefObject o, IMessageSink next)
+		public IMessageSink GetObjectSink(MarshalByRefObject obj, IMessageSink next)
 		{
-			return !methodInfos.Any() ? next : new CallTracingAspect(next, type, o);
+			return !methodInfos.Any() ? next : new CallTracingAspect(next, type, obj);
 		}
 
 		///
