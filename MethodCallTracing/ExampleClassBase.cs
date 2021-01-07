@@ -8,6 +8,18 @@ namespace MethodCallTracing
 	[CallTracing]
 	public class ExampleClassBase : ContextBoundObject, IMethodTracing
 	{
+		private bool indicator;
+		public bool Indicator
+		{
+			get => indicator;
+			set
+			{
+				indicator = value;
+				Console.WriteLine($"Indicator = {value}");
+			}
+		}
+
+		[BinaryIndicator(PropertyName: nameof(Indicator))]
 		public void Invoke()
 		{
 			Console.WriteLine($"{nameof(ExampleClassBase)} -> {nameof(Invoke)}");
@@ -21,6 +33,7 @@ namespace MethodCallTracing
 			// throw new Exception();
 		}
 
+		[BinaryIndicator(PropertyName: nameof(Indicator))]
 		[AfterExecutingBehavior(ActionName: nameof(AfterHandlerAsync))]
 		public async Task InvokeAsync()
 		{

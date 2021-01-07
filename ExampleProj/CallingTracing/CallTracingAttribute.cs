@@ -21,7 +21,7 @@ namespace ExampleProj.MethodCallTracing
 			
 			var methodsInfos = type
 				.GetMethods()
-				.Where(x => x.GetCustomAttributes<MethodBehaviorAttribute>().Any());
+				.Where(x => x.GetCustomAttributes<ActionNameAttribute>().Any());
 
 			ccm.ContextProperties.Add(new CallTracingProperty(callTrace, type, methodsInfos));
 		}

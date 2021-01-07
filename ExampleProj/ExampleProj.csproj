@@ -45,7 +45,8 @@
     <Compile Include="CallingTracing\CallTracingAspect.cs" />
     <Compile Include="CallingTracing\CallTracingAttribute.cs" />
     <Compile Include="CallingTracing\CallTracingProperty.cs" />
-    <Compile Include="MemberAttributes\MethodBehaviorAttribute.cs" />
+    <Compile Include="MemberAttributes\BinaryIndicatorAttribute.cs" />
+    <Compile Include="MemberAttributes\ActionNameAttribute.cs" />
     <Compile Include="Interfaces\IMethodTracing.cs" />
     <Compile Include="MemberAttributes\BeforExecutingBehaviorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
